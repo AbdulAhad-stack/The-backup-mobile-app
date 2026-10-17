@@ -1,0 +1,46 @@
+{
+  "expo": {
+    "name": "MediCare",
+    "slug": "medicare-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "scheme": "medicare",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.wellmind.medicare"
+    },
+    "android": {
+      "package": "com.wellmind.medicare",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "backgroundColor": "#0f2540",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-sharing",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 220,
+          "resizeMode": "contain",
+          "backgroundColor": "#0f2540"
+        }
+      ],
+      "expo-font"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "a2a245a5-6e6b-4752-b435-c53e2db9420f"
+      }
+    }
+  }
+}
