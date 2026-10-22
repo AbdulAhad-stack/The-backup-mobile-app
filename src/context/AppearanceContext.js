@@ -92,8 +92,8 @@ function AppearanceRoot({ children }) {
     [appearance, changeAppearance, dark, system, colors, navTheme],
   );
 
-  // Wait for the saved choice so a Dark user never sees a light first frame (and vice versa).
-  if (!loaded) return null;
+  // Render immediately so Expo Go can leave its native splash while preferences load.
+  // The saved choice is applied as soon as AsyncStorage responds.
   return (
     <AppearanceContext.Provider value={value}>
       <PreferencesProvider>{children}</PreferencesProvider>
