@@ -34,14 +34,12 @@ export function AppearanceProvider({ children }) {
 function AppearanceRoot({ children }) {
   // New installs follow the device (System). A saved choice always wins.
   const [appearance, setAppearance] = useState('System');
-  const [loaded, setLoaded] = useState(false);
   const [system, setSystem] = useState(readSystem);
 
   useEffect(() => {
     AsyncStorage.getItem('pref:appearance')
       .then((v) => { if (MODES.includes(v)) setAppearance(v); })
-      .catch(() => {})
-      .finally(() => setLoaded(true));
+      .catch(() => {});
   }, []);
 
   // Follow the device live: OS toggle while the app is open, and re-read on coming back to the
@@ -59,11 +57,11 @@ function AppearanceRoot({ children }) {
   }, []);
 
   // Make native pieces (alerts, keyboards, system dialogs) match the in-app choice.
-  // `null` hands control back to the device for System.
+  // React Native 0.86 requires `unspecified` to follow the device; `null` crashes Android.
   useEffect(() => {
     if (typeof Appearance.setColorScheme !== 'function') return;
     try {
-      Appearance.setColorScheme(appearance === 'System' ? null : appearance.toLowerCase());
+      Appearance.setColorScheme(appearance === 'System' ? 'unspecified' : appearance.toLowerCase());
       if (appearance === 'System') setSystem(readSystem());
     } catch { /* older RN: ignore */ }
   }, [appearance]);
